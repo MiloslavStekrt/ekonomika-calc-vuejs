@@ -6,6 +6,7 @@
     - procenta jsou procenta podle kterych urocime
     - dny jsou dny pri kterych  urocime
 --- 
+
 How to use this app? 
 - clone or download (unzip folder)
 - when you have folder just open index.html 

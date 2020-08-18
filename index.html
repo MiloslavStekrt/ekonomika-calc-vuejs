@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        body{
+            margin: 0;
+        }
+        main{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            max-width: 40vw;
+        }
+        span{
+            display: flex;
+            justify-content: space-between;
+            padding: .6em 2em;
+        }
+        p{
+            font-size: 72px;
+        }
+    </style>
+</head>
+<body>
+    <main id="apk">
+        <span id="uver">
+            <br><label for="uver">uver</label><input @change=add() type="number" min="0" v-model.number="uver">
+        </span>
+        <span id="cela_castka">
+            <br><label for="cela castka">cela castka</label><input @change=add() type="number" min="0" v-model.number="cela_castka">
+        </span>
+        <span id="procenta">
+            <br><label for="procenta">procenta</label><input @change=add() type="number" min="0" v-model.number="procenta">
+        </span>
+        <span id="day">
+            <br><label for="day">dny</label><input @change=add() type="number" min="0" v-model.number="day">
+        </span>
+        <p>{{ this.ans }}</p>
+    </main>
+    <script>
+        var last_pay;
+        const app = new Vue({
+            el: "#apk",
+            data: {
+                uver: 0,
+                cela_castka: 0,
+                procenta: 0,
+                day: 0,
+                ans: 0,
+            },
+            methods:{
+                add(){
+                    if (this.uver != 0 && this.cela_castka != 0 && this.procenta != 0 && this.day == 0) { //pocitame day
+                        this.ans = (this.uver * 365 * 100) / (this.procenta * this.cela_castka);
+                        document.getElementById('day').style.backgroundColor = 'grey';
+                        document.getElementById('procenta').style.backgroundColor = '';
+                        document.getElementById('cela_castka').style.backgroundColor = '';
+                        document.getElementById('uver').style.backgroundColor = '';
+                    }else if (this.uver != 0 && this.cela_castka != 0 && this.day != 0 && this.procenta == 0) { //procenta
+                        this.ans = (100 * 365 * this.uver) / (this.cela_castka * this.day);
+                        document.getElementById('day').style.backgroundColor = '';
+                        document.getElementById('procenta').style.backgroundColor = 'grey';
+                        document.getElementById('cela_castka').style.backgroundColor = '';
+                        document.getElementById('uver').style.backgroundColor = '';
+                    }else if (this.uver != 0 && this.procenta != 0 && this.day != 0 && this.cela_castka == 0) { //cela_castka castka
+                        this.ans = (this.uver * 365 * 100) / (this.day * this.procenta);
+                        document.getElementById('day').style.backgroundColor = '';
+                        document.getElementById('procenta').style.backgroundColor = '';
+                        document.getElementById('cela_castka').style.backgroundColor = 'grey';
+                        document.getElementById('uver').style.backgroundColor = '';
+                    }else if (this.cela_castka != 0 && this.procenta != 0 && this.day != 0 && this.uver == 0) { //uver
+                        this.ans = (this.cela_castka * this.procenta * this.day) / (100 * 365);
+                        document.getElementById('day').style.backgroundColor = '';
+                        document.getElementById('procenta').style.backgroundColor = '';
+                        document.getElementById('cela_castka').style.backgroundColor = '';
+                        document.getElementById('uver').style.backgroundColor = 'grey';
+                    }else{
+                        document.getElementById('day').style.backgroundColor = '';
+                        document.getElementById('procenta').style.backgroundColor = '';
+                        document.getElementById('cela_castka').style.backgroundColor = '';
+                        document.getElementById('uver').style.backgroundColor = '';
+                        console.log("Exit with code 1");
+                    } 
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ekonomika - calculator 3000</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
         body{
@@ -26,6 +26,9 @@
     </style>
 </head>
 <body>
+    <script>
+        alert("Vytej na strance. Thanks for visit >D")
+    </script>
     <main id="apk">
         <span id="uver">
             <br><label for="uver">uver</label><input @change=add() type="number" min="0" v-model.number="uver">
@@ -41,8 +44,10 @@
         </span>
         <p>{{ this.ans }}</p>
     </main>
+    <div class="meme">
+        <img src="meme_XD.jpeg" alt="Tohle je to nejlepsi meme Ever >D">
+    </div>
     <script>
-        var last_pay;
         const app = new Vue({
             el: "#apk",
             data: {
